@@ -1,9 +1,14 @@
 import Codebase.DP.L676_DecodeWaysII;
+import Prep.L332_ReconstructItinerary;
+import Prep.L564_FindClosestPalindrome;
 import UnionFind.L434_NumberOfIslandsII;
 
 public class LintMain {
     public static void main(String[] args) {
-        TestSpace p = new TestSpace();
+        L564_FindClosestPalindrome p = new L564_FindClosestPalindrome();
+
+//        L332_ReconstructItinerary p = new L332_ReconstructItinerary();
+//        TestSpace p = new TestSpace();
 //        L434_NumberOfIslandsII p = new L434_NumberOfIslandsII();
 
 //        L676_DecodeWaysII p = new L676_DecodeWaysII();

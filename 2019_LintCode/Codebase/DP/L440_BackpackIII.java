@@ -24,8 +24,6 @@ public class L440_BackpackIII {
         for (int i = 1; i <= A.length; i++) {
             for (int s = 1; s <= m; s++) {
                 dp[i][s] = dp[i-1][s]; // 上一个选择： 不选 i这个item 但是 size 是 s
-
-
                 if ( s >= A[i-1]) {
                     dp[i][s] = Math.max(
                             dp[i-1][s], // not picking current ith item, and for the given size s
