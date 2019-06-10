@@ -15,8 +15,6 @@ public class L564_FindClosestPalindrome {
         return x + (s.length() % 2 == 1 ? s.charAt(s.length() / 2) : "") + new StringBuilder(x).reverse().toString();
     }
 
-
-
     public String nearestPalindromic(String n) {
         if (n.equals("1"))
             return "0";
@@ -37,9 +35,12 @@ public class L564_FindClosestPalindrome {
         if (i == 0 && s.charAt(i) == '1') {
             s.delete(0, 1);
             int mid = (s.length() - 1) / 2;
-            s.replace(mid, mid + 1, "9");
+            s.replace(mid, mid + 1, "9"); // handle case like 10 -> 0, and this changes
+                                                    // 0->9
+            // Similarly -> 100XX then 99XX
+            // and this changes 99XX to 9<9>XX regardless
         } else
-            s.replace(i, i + 1, "" + (char)(s.charAt(i) - 1));
+            s.replace(i, i + 1, "" + (char)(s.charAt(i) - 1)); // numeric character decrease by 1
         String b = mirroring(s.toString());
         long diff2 = Math.abs(Long.parseLong(n) - Long.parseLong(b));
 
@@ -50,19 +51,21 @@ public class L564_FindClosestPalindrome {
             s.replace(i, i + 1, "0");
             i--;
         }
-        if (i < 0) {
-            s.insert(0, "1");
+        if (i < 0) { // as i = -1 in this case
+            s.insert(0, "1"); // 99 -> 00 --> 100
         } else
-            s.replace(i, i + 1, "" + (char)(s.charAt(i) + 1));
+            s.replace(i, i + 1, "" + (char)(s.charAt(i) + 1));  // 299 -> 399
         String c = mirroring(s.toString());
         long diff3 = Math.abs(Long.parseLong(n) - Long.parseLong(c));
 
-        if (diff2 <= diff1 && diff2 <= diff3)
+
+        if (diff2 <= diff1 && diff2 <= diff3) // b is the smaller value as compared to case 1,a, due to a flipping larger
+                                              // 10987 -> 10901 (case1), 11011 (case 2) so case 2 is preferred here
             return b;
-        if (diff1 <= diff3 && diff1 <= diff2)
+        if (diff1 <= diff3 && diff1 <= diff2) // a is the minimum
             return a;
         else
-            return c;
+            return c; // c seems always to be the larger portion
     }
 }
 
