@@ -14,9 +14,13 @@ public class L692_TopKFreqWords {
         HashMap<String, Integer> map = new HashMap<>();
         // w1, w2, ... wn where count of w1>=w2
         PriorityQueue<String> pq = new PriorityQueue<String>(
-                (w1,w2) ->
-                        map.get(w1) == map.get(w2) ? w1.compareTo(w2):
-                                map.get(w2) - map.get(w1)
+                (String w1, String w2) -> {
+                    if (map.get(w1) == map.get(w2)) {
+                        return w1.compareTo(w2);
+                    }
+                    return map.get(w2) - map.get(w1);
+        }
+
 
         );
 
